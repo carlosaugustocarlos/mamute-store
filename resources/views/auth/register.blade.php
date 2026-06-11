@@ -1,0 +1,44 @@
+<x-guest-layout>
+    <div class="mb-6 text-center">
+        <h1 class="text-2xl font-semibold text-slate-950">Criar conta</h1>
+        <p class="mt-1 text-sm text-slate-500">Preencha os dados para iniciar a gestão.</p>
+    </div>
+
+    <form method="POST" action="{{ route('register') }}" class="space-y-5">
+        @csrf
+
+        <div>
+            <x-input-label for="name" value="Nome" />
+            <x-text-input id="name" class="mt-1 block w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+        </div>
+
+        <div>
+            <x-input-label for="email" value="Email" />
+            <x-text-input id="email" class="mt-1 block w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div>
+
+        <div>
+            <x-input-label for="password" value="Palavra-passe" />
+            <x-text-input id="password" class="mt-1 block w-full" type="password" name="password" required autocomplete="new-password" />
+            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        </div>
+
+        <div>
+            <x-input-label for="password_confirmation" value="Confirmar palavra-passe" />
+            <x-text-input id="password_confirmation" class="mt-1 block w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        </div>
+
+        <div class="flex items-center justify-between gap-3">
+            <a class="text-sm font-medium text-blue-600 hover:text-blue-800" href="{{ route('login') }}">
+                Já tem uma conta?
+            </a>
+
+            <x-primary-button>
+                Criar conta
+            </x-primary-button>
+        </div>
+    </form>
+</x-guest-layout>
