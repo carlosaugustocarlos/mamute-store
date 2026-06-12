@@ -14,20 +14,27 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
-        User::factory()
-            ->count(5)
+        $demoUser = User::factory()->create([
+            'name' => 'Utilizador Demo',
+            'email' => 'test@example.com',
+        ]);
+
+        $users = User::factory()
+            ->count(2)
             ->create()
-            ->each(function (User $user): void {
-                Store::factory()
-                    ->count(fake()->numberBetween(3, 4))
-                    ->for($user)
-                    ->create()
-                    ->each(function (Store $store): void {
-                        Product::factory()
-                            ->count(fake()->numberBetween(10, 15))
-                            ->for($store)
-                            ->create();
-                    });
-            });
+            ->prepend($demoUser);
+
+        $users->each(function (User $user, int $index): void {
+            Store::factory()
+                ->count($index === 0 ? 4 : 3)
+                ->for($user)
+                ->create()
+                ->each(function (Store $store): void {
+                    Product::factory()
+                        ->count(10)
+                        ->for($store)
+                        ->create();
+                });
+        });
     }
 }
