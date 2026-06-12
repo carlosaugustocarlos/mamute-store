@@ -33,7 +33,9 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-## Configuração do `.env`
+## Ambiente de desenvolvimento
+
+Copie o ficheiro `.env.example` para `.env` e configure as variáveis necessárias.
 
 Configure a ligação MySQL:
 
@@ -85,7 +87,7 @@ O seeder cria:
 - 10 lojas
 - 100 produtos
 
-Utilizador principal:
+Utilizador aleatório pra teste:
 
 ```text
 Email: test@example.com
@@ -149,4 +151,4 @@ npm run build
 - Form Requests concentram as validações de lojas, produtos, perfil e login.
 - Policies garantem que utilizadores só podem gerir os próprios registos.
 - Queries de produtos usam eager loading com `with('store')` para evitar N+1 na listagem.
-- Mailtrap foi utilizado para simular o envio de email em foco na recuperação de senha sem que  eles sejam entregues a utilizadores reais.
+- Mailtrap foi utilizado para simular o envio de emails em ambiente de desenvolvimento, especialmente no fluxo de recuperação de palavra-passe, evitando o envio de emails para utilizadores reais.
