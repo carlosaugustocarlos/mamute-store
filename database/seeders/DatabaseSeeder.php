@@ -14,20 +14,20 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
-        $admin = User::factory()->create([
-            'name' => 'Mamute Admin',
-            'email' => 'test@example.com',
-        ]);
-
-        $users = collect([$admin])->merge(User::factory()->count(2)->create());
-
-        collect(range(1, 10))
-            ->map(fn (int $position) => Store::factory()
-                ->for($users[($position - 1) % $users->count()])
-                ->create())
-            ->each(fn (Store $store) => Product::factory()
-                ->count(10)
-                ->for($store)
-                ->create());
+        User::factory()
+            ->count(5)
+            ->create()
+            ->each(function (User $user): void {
+                Store::factory()
+                    ->count(fake()->numberBetween(3, 4))
+                    ->for($user)
+                    ->create()
+                    ->each(function (Store $store): void {
+                        Product::factory()
+                            ->count(fake()->numberBetween(10, 15))
+                            ->for($store)
+                            ->create();
+                    });
+            });
     }
 }
