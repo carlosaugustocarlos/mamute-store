@@ -50,6 +50,13 @@ DB_USERNAME=seu_utilizador
 DB_PASSWORD=sua_senha
 
 FILESYSTEM_DISK=public
+
+MAIL_MAILER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=0e2735df175e3b
+MAIL_PASSWORD=aa675dac448dbb
+MAIL_ENCRYPTION=null
 ```
 
 Crie a base de dados antes de executar as migrations:
@@ -142,3 +149,4 @@ npm run build
 - Form Requests concentram as validações de lojas, produtos, perfil e login.
 - Policies garantem que utilizadores só podem gerir os próprios registos.
 - Queries de produtos usam eager loading com `with('store')` para evitar N+1 na listagem.
+- Mailtrap foi utilizado para simular o envio de email em foco na recuperação de senha sem que  eles sejam entregues a utilizadores reais.
