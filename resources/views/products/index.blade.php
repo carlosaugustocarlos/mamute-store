@@ -41,11 +41,13 @@
                     <div>
                         <x-input-label for="min_price" value="Preço mínimo" />
                         <x-text-input id="min_price" name="min_price" type="number" min="0" step="0.01" class="mt-1 block w-full" :value="request('min_price')" />
+                        <x-input-error class="mt-2" :messages="$errors->get('min_price')" />
                     </div>
 
                     <div>
                         <x-input-label for="max_price" value="Preço máximo" />
                         <x-text-input id="max_price" name="max_price" type="number" min="0" step="0.01" class="mt-1 block w-full" :value="request('max_price')" />
+                        <x-input-error class="mt-2" :messages="$errors->get('max_price')" />
                     </div>
 
                     <div class="flex items-end">

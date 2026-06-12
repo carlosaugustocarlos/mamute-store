@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductFilterRequest;
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
@@ -12,8 +13,10 @@ use Illuminate\View\View;
 
 class ProductController extends Controller
 {
-    public function index(Request $request): View
+    public function index(ProductFilterRequest $request): View
     {
+        $filters = $request->validated();
+
         $stores = $request->user()
             ->stores()
             ->orderBy('name')
@@ -22,10 +25,10 @@ class ProductController extends Controller
         $products = Product::query()
             ->with('store')
             ->whereHas('store', fn ($query) => $query->where('user_id', $request->user()->id))
-            ->when($request->filled('search'), fn ($query) => $query->where('name', 'like', '%'.$request->string('search')->toString().'%'))
-            ->when($request->filled('store_id'), fn ($query) => $query->where('store_id', $request->integer('store_id')))
-            ->when($request->filled('min_price'), fn ($query) => $query->where('price', '>=', $request->input('min_price')))
-            ->when($request->filled('max_price'), fn ($query) => $query->where('price', '<=', $request->input('max_price')))
+            ->when($request->filled('search'), fn ($query) => $query->where('name', 'like', '%'.$filters['search'].'%'))
+            ->when($request->filled('store_id'), fn ($query) => $query->where('store_id', $filters['store_id']))
+            ->when($request->filled('min_price'), fn ($query) => $query->where('price', '>=', $filters['min_price']))
+            ->when($request->filled('max_price'), fn ($query) => $query->where('price', '<=', $filters['max_price']))
             ->when($request->boolean('in_stock'), fn ($query) => $query->where('stock_quantity', '>', 0))
             ->latest()
             ->paginate(10)
