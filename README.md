@@ -1,6 +1,6 @@
 # Mamute Store
 
-Aplicação web em Laravel para gestão de lojas e produtos, desenvolvida para o teste técnico prático da Mamute Africano.
+Aplicação web em Laravel para gestão de lojas e produtos, com autenticação, controlo de acesso e gestão multiutilizador. 
 
 ## Tecnologias
 
@@ -87,7 +87,7 @@ O seeder cria:
 - 10 lojas
 - 100 produtos
 
-Utilizador aleatório pra teste:
+Utilizador de demonstração:
 
 ```text
 Email: test@example.com
