@@ -38,21 +38,5 @@
                 </div>
             </div>
         </div>
-
-        <div class="mt-6 grid gap-5 md:grid-cols-2">
-            <a href="{{ route('stores.index') }}" class="panel block transition hover:border-blue-200 hover:shadow-md">
-                <div class="panel-body">
-                    <p class="text-base font-semibold text-slate-950">Gerir lojas</p>
-                    <p class="mt-2 text-sm text-slate-500">Consultar, criar e actualizar lojas registadas.</p>
-                </div>
-            </a>
-
-            <a href="{{ route('products.index') }}" class="panel block transition hover:border-blue-200 hover:shadow-md">
-                <div class="panel-body">
-                    <p class="text-base font-semibold text-slate-950">Gerir produtos</p>
-                    <p class="mt-2 text-sm text-slate-500">Consultar produtos, aplicar filtros e gerir stock.</p>
-                </div>
-            </a>
-        </div>
     </div>
 </x-app-layout>
